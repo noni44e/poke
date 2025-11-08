@@ -13,7 +13,7 @@ let input = document.getElementById('input');
 let btnpista = document.getElementById('pista');
 
 let pokemon = document.getElementById('respuesta');
-pokemon.innerHTML = '<img id="img" class="opaci imagen" src="../img/quien.jpg">';
+pokemon.innerHTML = '<img id="img" class="opaci imagen" src="https://i.redd.it/td4wgilvnjp61.jpg">';
 let btncant = document.getElementById('try');
 
 let contad = document.getElementById('contador');
@@ -30,7 +30,7 @@ let conta = 0;
         console.log(numero);
         let intentos = 4;
         setTimeout(()=>{
-            pokemon.innerHTML = '<img id="img" class="opaci imagen" src="../img/quien.jpg">';
+            pokemon.innerHTML = '<img id="img" class="opaci imagen" src="https://i.redd.it/td4wgilvnjp61.jpg">';
         },3000);
         fetch(url+numero)
             .then(response=> {
