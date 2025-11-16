@@ -7,23 +7,31 @@ let preguntas = ['sprite','types',
 ];
 
 let preg = ['Quizá necesites una ayuda visual...', 'Tipo/s', 'Empieza con la letra:', 'Pokedex:']
-
+let control = document.getElementById('control');
 let input = document.getElementById('input');
 
 let btnpista = document.getElementById('pista');
 
 let pokemon = document.getElementById('respuesta');
-pokemon.innerHTML = '<img id="img" class="opaci imagen" src="https://i.redd.it/td4wgilvnjp61.jpg">';
+
 let btncant = document.getElementById('try');
 
 let contad = document.getElementById('contador');
 
 let contenedor = document.getElementById('contenedorinput');
+let fin = document.createElement('div');
+fin.innerHTML= `<div id="jugar" class="juego">Jugar de nuevo</div>
+                <div id="fin" class="juego">Fin</div>`;
 
+let alerta = document.createElement('div');
+alerta.id = 'alerta';
+control.appendChild(fin);
 document.addEventListener('DOMContentLoaded',()=>{
+    
 let conta = 0;
 //voy a hacer una funcion con esto, si se emboca que vuelva a buscar un numero.
     function juego(conta){
+        control.classList.add('contro');
         contad.innerText = conta;
         btncant.innerText = cant;
         let numero = Math.floor(Math.random()*1000 + 1);
@@ -31,7 +39,7 @@ let conta = 0;
         let intentos = 4;
         setTimeout(()=>{
             pokemon.innerHTML = '<img id="img" class="opaci imagen" src="https://i.redd.it/td4wgilvnjp61.jpg">';
-        },3000);
+        },2000);
         fetch(url+numero)
             .then(response=> {
                 if(!response.ok){
@@ -84,8 +92,20 @@ let conta = 0;
                         document.getElementById('img').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${numero}.png`;
                     } 
                     if (intentos == 0){
-                        alert('Se terminó el juego.')
-                        return;
+                        control.classList.remove('contro');
+                        alert('Se terminó el juego. Si quieres volver a jugar presiona enter. Si no quieres presiona cualquier otra tecla.');
+                        let play = document.getElementById('jugar');
+                        let end = document.getElementById('fin');
+                        play.addEventListener('click', ()=>{
+                            let conta = 0;
+                            input.remove();
+                            input = document.createElement('input');
+                            input.id = 'input';
+                            input.placeholder = 'Escribí tu Pokémon';
+                            contenedor.appendChild(input);
+                            juego(conta);
+                        })
+                        
                     }
                 });
 
